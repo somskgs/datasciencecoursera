@@ -44,7 +44,7 @@ This data is taken from
     good<-complete.cases(data$steps)
     newdata<-data[good,]
 
-2.  Histogram of total numbr of steps taken each day
+1.  Histogram of total numbr of steps taken each day
 
 <!-- -->
 
@@ -62,10 +62,8 @@ This data is taken from
 
     ## png 
     ##   2
-    
-![](https://github.com/somskgs/datasciencecoursera/blob/master/hist1.png)
 
-3.  Mean And Median Number Of Steps Taken Each Day
+1.  Mean And Median Number Of Steps Taken Each Day
 
 <!-- -->
 
@@ -196,14 +194,14 @@ This data is taken from
     ## 52 2012-11-28        70.0
     ## 53 2012-11-29        44.5
 
-4.  Time Series Plot Of Average Number Of Steps Taken Each Day
+1.  Time Series Plot Of Average Number Of Steps Taken Each Day
 
 <!-- -->
 
     ggplot(meansteps,aes(Date,Meansteps,group=1))+geom_line(colour="Blue")+ylab("Steps")+xlab("Date")+ggtitle("Time Series Plot Of Mean Steps Taken Each Day")+theme(axis.text.x=element_text(angle=90, hjust=1))
 
 ![](PA1_template_files/figure-markdown_strict/Time%20Series%20Plot-1.png)
-![](https://github.com/somskgs/datasciencecoursera/blob/master/timeseries.png)
+
     dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/timeseries.png")
 
     ## png 
@@ -214,7 +212,7 @@ This data is taken from
     ## png 
     ##   2
 
-5.  The 5-minute interval that, on average, contains the maximum number
+1.  The 5-minute interval that, on average, contains the maximum number
     of steps
 
 <!-- -->
@@ -234,7 +232,7 @@ This data is taken from
     ## png 
     ##   2
 
-6.  Code For Imputing Missing Values
+1.  Code For Imputing Missing Values
 
 <!-- -->
 
@@ -2814,7 +2812,7 @@ This data is taken from
 
     completeData<-complete(impute_data,2)
 
-7.  Histogram of the total number of steps taken each day after missing
+1.  Histogram of the total number of steps taken each day after missing
     values are imputed
 
 <!-- -->
@@ -2823,8 +2821,8 @@ This data is taken from
     ggplot(dt,aes(date,x))+geom_bar(stat="Identity",fill = "blue")+ylab("Count")+xlab("Date")+ggtitle("Histogram of Total Number Of Steps Taken Each Day")+theme(axis.text.x=element_text(angle=90, hjust=1))
 
 ![](PA1_template_files/figure-markdown_strict/Code%20For%20Histogram-1.png)
-![](https://github.com/somskgs/datasciencecoursera/blob/master/hist2.png)
-    dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/weekendvsweekday.png")
+
+    dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/hist2.png")
 
     ## png 
     ##   3
@@ -2834,7 +2832,7 @@ This data is taken from
     ## png 
     ##   2
 
-8.  Panel plot comparing the average number of steps taken per 5-minute
+1.  Panel plot comparing the average number of steps taken per 5-minute
     interval across weekdays and weekends
 
 <!-- -->
@@ -2850,4 +2848,13 @@ This data is taken from
     xyplot(steps~interval | day, data = wdata, type="l",grid=T,layout=c(1,2), col="Blue",ylab="Number of Steps",xlab="5 Min - Interval", main= " Average 5 Min Activity Intervals For Weeday Vs Weekend")
 
 ![](PA1_template_files/figure-markdown_strict/Avg%20Number%20of%20steps%20taken%20per%205-minute%20interval%20across%20weekdays%20and%20weekends-1.png)
-![](https://github.com/somskgs/datasciencecoursera/blob/master/weekendvsweekday.png)
+
+    dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/weekendvsweekday.png")
+
+    ## png 
+    ##   3
+
+    dev.off()
+
+    ## png 
+    ##   2

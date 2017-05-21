@@ -74,7 +74,7 @@ completeData<-complete(impute_data,2)
 ```{R Code For Histogram,echo=TRUE}
 dt<-aggregate(completeData$steps,list(date=completeData$date),sum)
 ggplot(dt,aes(date,x))+geom_bar(stat="Identity",fill = "blue")+ylab("Count")+xlab("Date")+ggtitle("Histogram of Total Number Of Steps Taken Each Day")+theme(axis.text.x=element_text(angle=90, hjust=1))
-dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/weekendvsweekday.png")
+dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/hist2.png")
 dev.off()
 ```
 
@@ -86,4 +86,6 @@ newdata$day[weekdays(as.Date(newdata$date),abb=T) %in% c("Sat","Sun")]<-"weekend
 wdata<-aggregate(steps~interval+day, data=newdata,FUN="mean")
 
 xyplot(steps~interval | day, data = wdata, type="l",grid=T,layout=c(1,2), col="Blue",ylab="Number of Steps",xlab="5 Min - Interval", main= " Average 5 Min Activity Intervals For Weeday Vs Weekend")
+dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/weekendvsweekday.png")
+dev.off()
 ```
