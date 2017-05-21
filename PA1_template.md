@@ -2833,7 +2833,7 @@ This data is taken from
 
     ## png 
     ##   2
-![](https://github.com/somskgs/datasciencecoursera/blob/master/weekendvsweekday.png)
+
 1.  Panel plot comparing the average number of steps taken per 5-minute
     interval across weekdays and weekends
 
@@ -2850,3 +2850,4 @@ This data is taken from
     xyplot(steps~interval | day, data = wdata, type="l",grid=T,layout=c(1,2), col="Blue",ylab="Number of Steps",xlab="5 Min - Interval", main= " Average 5 Min Activity Intervals For Weeday Vs Weekend")
 
 ![](PA1_template_files/figure-markdown_strict/Avg%20Number%20of%20steps%20taken%20per%205-minute%20interval%20across%20weekdays%20and%20weekends-1.png)
+![](https://github.com/somskgs/datasciencecoursera/blob/master/weekendvsweekday.png)
