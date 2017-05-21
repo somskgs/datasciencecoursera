@@ -62,6 +62,8 @@ This data is taken from
 
     ## png 
     ##   2
+    
+![](https://github.com/somskgs/datasciencecoursera/blob/master/hist1.png)
 
 1.  Mean And Median Number Of Steps Taken Each Day
 
