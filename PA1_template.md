@@ -44,7 +44,7 @@ This data is taken from
     good<-complete.cases(data$steps)
     newdata<-data[good,]
 
-1.  Histogram of total numbr of steps taken each day
+2.  Histogram of total numbr of steps taken each day
 
 <!-- -->
 
@@ -65,7 +65,7 @@ This data is taken from
     
 ![](https://github.com/somskgs/datasciencecoursera/blob/master/hist1.png)
 
-1.  Mean And Median Number Of Steps Taken Each Day
+3.  Mean And Median Number Of Steps Taken Each Day
 
 <!-- -->
 
@@ -196,7 +196,7 @@ This data is taken from
     ## 52 2012-11-28        70.0
     ## 53 2012-11-29        44.5
 
-1.  Time Series Plot Of Average Number Of Steps Taken Each Day
+4.  Time Series Plot Of Average Number Of Steps Taken Each Day
 
 <!-- -->
 
@@ -214,7 +214,7 @@ This data is taken from
     ## png 
     ##   2
 
-1.  The 5-minute interval that, on average, contains the maximum number
+5.  The 5-minute interval that, on average, contains the maximum number
     of steps
 
 <!-- -->
@@ -234,7 +234,7 @@ This data is taken from
     ## png 
     ##   2
 
-1.  Code For Imputing Missing Values
+6.  Code For Imputing Missing Values
 
 <!-- -->
 
@@ -2814,7 +2814,7 @@ This data is taken from
 
     completeData<-complete(impute_data,2)
 
-1.  Histogram of the total number of steps taken each day after missing
+7.  Histogram of the total number of steps taken each day after missing
     values are imputed
 
 <!-- -->
@@ -2823,7 +2823,7 @@ This data is taken from
     ggplot(dt,aes(date,x))+geom_bar(stat="Identity",fill = "blue")+ylab("Count")+xlab("Date")+ggtitle("Histogram of Total Number Of Steps Taken Each Day")+theme(axis.text.x=element_text(angle=90, hjust=1))
 
 ![](PA1_template_files/figure-markdown_strict/Code%20For%20Histogram-1.png)
-
+![](https://github.com/somskgs/datasciencecoursera/blob/master/hist2.png)
     dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/weekendvsweekday.png")
 
     ## png 
@@ -2834,7 +2834,7 @@ This data is taken from
     ## png 
     ##   2
 
-1.  Panel plot comparing the average number of steps taken per 5-minute
+8.  Panel plot comparing the average number of steps taken per 5-minute
     interval across weekdays and weekends
 
 <!-- -->
