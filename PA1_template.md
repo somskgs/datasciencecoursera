@@ -2833,7 +2833,7 @@ This data is taken from
 
     ## png 
     ##   2
-
+![](https://github.com/somskgs/datasciencecoursera/blob/master/weekendvsweekday.png)
 1.  Panel plot comparing the average number of steps taken per 5-minute
     interval across weekdays and weekends
 
