@@ -6,4 +6,5 @@ output: html_document
 ---
 
 ##This is a markdown file
+
 ![](https://github.com/somskgs/datasciencecoursera/blob/master/Plot1.png)
