@@ -203,7 +203,7 @@ This data is taken from
     ggplot(meansteps,aes(Date,Meansteps,group=1))+geom_line(colour="Blue")+ylab("Steps")+xlab("Date")+ggtitle("Time Series Plot Of Mean Steps Taken Each Day")+theme(axis.text.x=element_text(angle=90, hjust=1))
 
 ![](PA1_template_files/figure-markdown_strict/Time%20Series%20Plot-1.png)
-
+![](https://github.com/somskgs/datasciencecoursera/blob/master/timeseries.png)
     dev.copy(png,"S:/Software/R/Data Science Specialization/Reproducible Research/Week2/timeseries.png")
 
     ## png 
