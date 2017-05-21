@@ -6,4 +6,4 @@ output: html_document
 ---
 
 ##This is a markdown file
-datasciencecoursera/Plot1.png
+![](datasciencecoursera/Plot1.png)
