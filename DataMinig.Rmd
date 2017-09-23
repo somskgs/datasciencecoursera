@@ -1,0 +1,150 @@
+---
+title: "Practical Machine Learning Project: Human Activity Recognition(Weight Lifting Exercise)"
+author: "Someshwar Rao Sattiraju"
+date: "September 20, 2017"
+output: pdf_document
+---
+
+Script was executed using RStudio on Windows OS
+
+
+#Background:
+
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: http://groupware.les.inf.puc-rio.br/har (see the section on the Weight Lifting Exercise Dataset).
+
+Refrence for the paper: The data for this project come from this source: http://groupware.les.inf.puc-rio.br/har.
+
+#Data
+
+The training data for this project are available here:
+
+https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv
+
+The test data are available here:
+
+https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv
+
+#About Human Activity Recognition
+The human activity recognition research is done to determine different activities being performed( predict which activity was performed at a specific point in time), in this case it was a weight lifting exercise data set.
+
+
+
+
+Read more: http://groupware.les.inf.puc-rio.br/har#ixzz4sQMF9HSB
+
+#Reproducability
+
+Classification and model generation was done using a random number generator seed with value of 1223. In order to reproduce the result the same needs to be used. We will need packages such as RandomForest, caret, rpart, rpartplot for modeling the dataset.  
+
+#About How The Model Was Built
+
+Six young health participants were asked to perform one set of 10 repetitions of the Unilateral Dumbbell Biceps Curl in five different fashions: exactly according to the specification (Class A), throwing the elbows to the front (Class B), lifting the dumbbell only halfway (Class C), lowering the dumbbell only halfway (Class D) and throwing the hips to the front (Class E).
+
+Essentially Class A pertains to actual exercise to be performed and rest of the classes - Class B to Class E are wrong ways of doing the exercise or mistakes. 
+
+The problem is a classification one and we need to fit a classification model, best model with least error and high accuracy has to be choosen, I chooe 3 methods - Recursive & Generalized Classification Trees, Random Forest and K- Nearest Neighbours to model this dataset.
+
+#Performing Analysis Of The Data Set 
+
+Loading Training and Testing data sets and elemenating Null values 
+```{R Loading Data, cache = TRUE}
+
+library(dplyr)
+library(data.table)
+set.seed(1223)
+#The data set seems to have Missing values, NA, Div/0 error etc., the same needs to be replaced with NA using na.strings
+training<-read.csv("S:/Software/R/Data Science Specialization/MACHINE LEARNING/Week4/pml-training.csv",na.strings=c("NA","#DIV/0!",""))
+testing<-read.csv("S:/Software/R/Data Science Specialization/MACHINE LEARNING/Week4/pml-testing.csv",na.strings=c("NA","#DIV/0!",""))
+
+dim(training)
+dim(testing)
+```
+
+Plot Of Frequency Of Classe
+
+```{R Plott Data, cache=TRUE}
+library(ggplot2)
+ggplot(data=training,aes(classe))+geom_bar(aes(fill=classe))
+
+```
+
+
+We find that the columns 1 to 7 are irrelavant for analysis and hence the same is removed from the data set also we would like to remove those columns which sum to 0 or have only 0's.
+
+We subselect the data and devide the same to training and test sets using createDataPartition
+
+This is done by looking at the data and summary of the data ( Attached in Appendix ).
+
+```{R subselection, cache = TRUE}
+library(caret)
+
+training<- training[ ,colSums(is.na(training)) == 0]
+testing<- testing[ ,colSums(is.na(testing)) == 0]
+
+training<-training[,-c(1:7)]
+testing<-testing[,-c(1:7)]
+
+
+dim(training)
+dim(testing)
+``` 
+
+
+
+#Cross Validation And Fitting Classification Tree Using 'rpart'  
+
+Cross validation has been done using createDataPartition funcion to divide the data ( 75% for training and modeling purposes and 25% to testing), multiple models will be fit and the best one which has the most accuracy will be choosen. With the choosen model the test set will be validated.
+
+```{R Classification Tree, cache = TRUE}
+
+library(rpart)
+library(rpart.plot)
+
+inTrain<-createDataPartition(y=training$classe, p=0.75, list=FALSE)
+trainset<-training[inTrain,]
+testset<-training[-inTrain, ]
+
+
+mod1<-rpart(classe~., data=trainset, method="class")
+prediction1<-predict(mod1, testset, type="class")
+rpart.plot(mod1, main="Classification Tree", extra=102, under=TRUE,faclen=0)
+confusionMatrix(prediction1, testset$classe)
+```
+
+#Random Forest Model:
+
+```{R Radom Forest, cache = TRUE}
+library(randomForest)
+library(rattle)
+mod2 <- randomForest(classe ~. , data= trainset, method="class")
+prediction2 <- predict(mod2, testset, type="class")
+confusionMatrix(prediction2, testset$classe)
+```
+
+# K-Nearest Neighbours Model:
+
+```{R KNN Algorithm, cache = TRUE}
+mod3 <- train(classe ~., data= trainset, method="knn")
+prediction3 <- predict(mod3, testset)
+confusionMatrix(prediction3, testset$classe)
+```
+
+
+# Test Data Set & Generation OF File
+```{R Testing Model On Test Set , cache = TRUE}
+predictionfinal<-predict(mod2, testing, type="class")
+write.csv(predictionfinal,file = "S:/Software/R/Data Science Specialization/MACHINE LEARNING/Week4/TestData.csv",row.names=FALSE)
+
+```
+
+#Appendix
+```{R Appemdix, cache = TRUE}
+trn<-read.csv("S:/Software/R/Data Science Specialization/MACHINE LEARNING/Week4/pml-training.csv",na.strings=c("NA","#DIV/0!",""))
+summary(trn)
+```
+
+#Citation
+
+1. http://groupware.les.inf.puc-rio.br/har
+2. Velloso, E.; Bulling, A.; Gellersen, H.; Ugulino, W.; Fuks, H. Qualitative Activity Recognition of     Weight Lifting Exercises. Proceedings of 4th International Conference in Cooperation with SIGCHI       (Augmented Human '13) . Stuttgart, Germany: ACM SIGCHI, 2013.
+
